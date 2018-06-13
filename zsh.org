@@ -1,0 +1,7 @@
+* zsh 中 cd tab 补全会出现一个不能删除的 cd 字符
+ssh lianjie fuwuqi shi 
+zsh 中 cd tab 补全会出现一个不能删除的 cd 字符
+
+jijuebanfa:
+genghuan Xshell zhongduan shezhi zhong de bianma
+
