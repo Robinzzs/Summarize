@@ -1,0 +1,132 @@
+* Mac系统安装
+Mac系统安装大体三种方式
+1、App Store下载Install XXX.app安装包，双击直接运行进行安装。
+2、重启系统，进入联网恢复模式，在苹果图标亮起前按住command+r或者command+option+r
+亦或者command+shift+option+r即可进入，不同的方式可能会恢复不同的系统版本。（详情参考
+https://support.apple.com/zh-cn/HT204904 ）
+3、使用U盘进行安装，避免网速过慢时，在联网恢复模式下等待四五个小时下载系统安装包，
+电脑无法使用的囧境。
+** 镜像下载
+推荐不要采用他人服务器或上传网盘的安装包，通过http://www.pc6.com/apple/ 选取相应
+版本，可以链接到苹果商店下载到原版镜像。
+** U盘制作
+1、右键格式化U盘（（））FAT32格式，重名名为全英文MyVolume  。
+2、打开terminal终端，敲入如下命令：（安装10.12版本Sierra，不同版本对应进行名字修改即可）
+#+BEGIN_SRC shell
+  sudo /Applications/Install\ macOS\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume --applicationpath /Applications/Install\ macOS\ Sierra.app
+#+END_SRC
+3、输入密码后，确认安装操作后，进入制作过程，大约20分钟，启动盘制作完毕
+** 系统安装
+1、制作好的U盘接入Mac，在启动时安装option键，显示选择启动盘后选择U盘。
+2、先选择磁盘工具Disk tools，将Macintoch HD磁盘擦除，然后选择系统安装Install OS X。
+3、等待安装完成。
+* Homebrew及常用软件安装
+Homebrew是Mac下较为优秀的包管理工具，从Macport转而使用Homebrew体会到了很多便利。
+** Homebrew安装
+1、打开terminal终端，安装命令行工具Command-line-tools,输入如下命令后回车，然后
+直接点击安装。
+#+BEGIN_SRC shell
+  xcode-select --install
+#+END_SRC
+2、安装Homebre，过程会需要输入密码。
+#+BEGIN_SRC shell
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#+END_SRC
+** 常用软件安装
+使用Homebrew可以安装大部分常用软件QQ、火狐、QQ音乐、搜狗输入法等等...
+#+BEGIN_SRC shell
+  brew cask install qq firefox qqmusic sourcetree sogouinput alfred
+  brew cask install iterm2 sublime-text iina
+  brew install wget git svn zsh ag htop ctags 
+#+END_SRC
+其余微信、Onedrive等应用可以到App商店下载
+
+* Emacs与spacemacs安装
+Emacs优秀的文本编辑器，具有很强的拓展性
+** Emacs
+推荐使用GUI版本的emacs，键入如下命令进行安装：
+#+BEGIN_SRC shell
+  brew install emacs --with-cocoa
+#+END_SRC
+在.bashrc、.bash_profile或.zshrc添加别名避免使用系统自带的旧版emacs，例可加入如下：
+（对应自己emacs的版本和具体地址）
+#+BEGIN_SRC shell
+  alias emacs="/usr/local/Cellar/emacs/25.3/bin/emacs"
+#+END_SRC
+
+** spacemacs
+较为流行的emacs配置方案
+
+删除之前的配置后，git clone下来develop分支的配置包
+#+BEGIN_SRC shell
+  rm .emacs
+  rm -rf .emacs.d
+  git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d -b develop
+#+END_SRC
+加入自己定制的配置方案
+#+BEGIN_SRC shell
+ git clone https://github.com/Robinzzs/spacemacs-private-config.git ~/.spacemacs.d
+#+END_SRC
+
+* Anaconda安装
+
+** why Anaconda
+python各类科学计算及工具包的集合，conda工具很方便进行python2与python3环境的切换，
+一些基本的系统工具依赖python2，因而先安装Anaconda2，以python2作为主环境，在需要时切换
+至python3.
+** Anaconda2与Anaconda3共存
+1、官网下载Anaconda2、Anaconda3对应的的Command-Line Installer。
+（brew install 只能安装Anaconda3）
+2、先安装Anaconda2，在安装包目录下输入：(包名称.sh)
+#+BEGIN_SRC shell
+ ./Anaconda2-4.3.1-Linux-x86_64.sh 
+#+END_SRC
+根据提示安装完后，在.bashrc、.bash_profile或.zshrc添加PATH。
+#+BEGIN_SRC shell
+  export PATH="/Users/robinzzs/anaconda2/bin:$PATH"
+#+END_SRC
+
+3、此时Anaconda2已经可以运行启动，在安装Anaconda3，输入：（包名称.sh）
+#+BEGIN_SRC shell
+./Anaconda3-4.3.0-Linux-x86_64.sh -b -p $HOME/anaconda2/envs/py3
+rm -rf $HOME/anaconda2/envs/py3/bin/conda*
+rm -rf $HOME/anaconda2/envs/py3/conda-meta/conda-*
+rm -rf $HOME/anaconda2/envs/py3/bin/activate
+rm -rf $HOME/anaconda2/envs/py3/bin/deactivate
+cd $HOME/anaconda2/envs/py3/bin
+ln -s ../../../bin/conda .
+ln -s ../../../bin/activate .
+ln -s ../../../bin/deactivate .
+#+END_SRC
+
+4、完成后检查安装环境
+#+BEGIN_SRC shell
+  conda info --envs
+#+END_SRC
+列出root及py3环境及安装成功，可通过conda切换不同的环境。
+
+* Madagascar安装
+地球物理科学计算开源软件
+** git包下载
+git下载RSFSRC源文件
+#+BEGIN_SRC shell
+  git clone https://github.com/ahay/src RSFSRC
+#+END_SRC
+** 依赖包安装
+使用Honebrew安装依赖包
+#+BEGIN_SRC shell
+  brew cask install xquartz mactex
+  brew install fftw openmpi netpbm gd suitesparse swig caire plplot ffmpeg
+#+END_SRC
+** 安装及环境变量配置
+依赖包安装好后，可开始安装
+#+BEGIN_SRC shell
+  ./configure CC=clang CXX=clang++ API=f90 --prefix=~/madagascar
+  scons install 
+#+END_SRC
+安装过程大约二十分钟，完成后在.bashrc、.bash_profile或.zshrc中配置环境变量，例如：
+#+BEGIN_SRC shell
+  source ~/madagascar/share/madagascar/etc/env.sh
+  export DATAPATH=~/DATAFILE/
+#+END_SRC
+

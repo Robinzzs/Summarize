@@ -1,0 +1,19 @@
+madagasscar for spacsemacs
+
+* enable python-mode on SConstruct files
+
+#+BEGIN_SRC lisp
+  (setq auto-mode-alist
+        (cons '("SConstruct" . python-mode) auto-mode-alist))
+  (set-default 'compile-command "scons")
+#+END_SRC
+
+
+* c file header
+
+#+BEGIN_SRC lisp
+  (setq flycheck-clang-include-path '("/Users/robinzzs/madagascar/include"))
+#+END_SRC
+
+still have problem
+1. mini buffer did'nt appear function arguments.

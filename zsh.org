@@ -1,7 +1,13 @@
-* zsh 中 cd tab 补全会出现一个不能删除的 cd 字符
-ssh lianjie fuwuqi shi 
-zsh 中 cd tab 补全会出现一个不能删除的 cd 字符
+* use SSH(XShell) remote connecting Linux(Centos) workstation
+zsh 中 tab 补全会出现一个不能删除的 cd 字符
 
-jijuebanfa:
-genghuan Xshell zhongduan shezhi zhong de bianma
+there may have some disordered spectial charactors in zsh while
+using TAB to complete your command line
 
+solution:
+change the encode configuration in XShell
+
+
+ps:
+Appearing spectial charactors sometimes the reason may be
+the encode configuration.
