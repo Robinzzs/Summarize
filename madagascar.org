@@ -15,5 +15,21 @@ madagasscar for spacsemacs
   (setq flycheck-clang-include-path '("/Users/robinzzs/madagascar/include"))
 #+END_SRC
 
-still have problem
+* emacs minibuffer : Server error 
+When editing .py files I found there is no pop out candidate completion and
+pressing tab did not work also. And pressing tab will trigger a line in 
+the bottom of Spacemacs:
+Server error: TypeError("__init__() got an unexpected argument key word 'environment' ", )
+
+Solution:
+
+#+BEGIN_SRC shell
+  sudo pip uninstall anaconda-mode
+  sudo pip install anaconda-mode
+  sudo pip install --upgrade anaconda-mode
+#+END_SRC
+
+The main idea is to update anaconda-mode.
+
+* still have problem
 1. mini buffer did'nt appear function arguments.
