@@ -1,4 +1,9 @@
-* 基本数据存储
+
+Record experiences while writing c file to load SMC data
+
+SMC = single chip microcomputer
+
+* 基本数据存储 Basic format of data storage
   数据在计算机中的表示最终都是以二进制的形式存在，最小的
 存储单元称为“位bit”，只能存放0或1，称为二进制位，多数计
 算机把八个二进制位组成一个“字节byte”，并给每个字节分配
@@ -34,7 +39,7 @@ double       8            64
 内存存储 =(10101000|10110011|11011010|11100000)2		 
 
 
-* 十六进制数据
+* 十六进制与二进制 hexadecimal and binary
   如char c=‘0’= 0x30 =(30)16 =(110000)2 =(00110000)2
 char型变量 1byte 8bit，2^8=8^4=16^2=256 即两位十六进制数
 可以表示八位二进制数。

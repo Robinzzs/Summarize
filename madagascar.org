@@ -1,6 +1,7 @@
-madagasscar for spacsemacs
 
-* enable python-mode on SConstruct files
+Some settings in spacsemacs enable madagascar function well
+
+* enable python-mode in SConstruct files
 
 #+BEGIN_SRC lisp
   (setq auto-mode-alist
@@ -8,8 +9,7 @@ madagasscar for spacsemacs
   (set-default 'compile-command "scons")
 #+END_SRC
 
-
-* c file header
+* c file header <rsf.h>
 
 #+BEGIN_SRC lisp
   (setq flycheck-clang-include-path '("/Users/robinzzs/madagascar/include"))
@@ -32,4 +32,4 @@ Solution:
 The main idea is to update anaconda-mode.
 
 * still have problem
-1. mini buffer did'nt appear function arguments.
+1. mini buffer did'nt appear function arguments in c-c++-mode.

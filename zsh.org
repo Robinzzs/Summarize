@@ -1,4 +1,15 @@
-* use SSH(XShell) remote connecting Linux(Centos) workstation
+
+Record some experiences while using zsh
+
+* Recommand plugin
+1. autojump
+2. extract
+3. sudo
+4. zsh-autosuggestions
+5. zsh-syntax-highlighting
+
+
+* Use SSH(XShell) remote connecting Linux(Centos) workstation
 zsh 中 tab 补全会出现一个不能删除的 cd 字符
 
 there may have some disordered spectial charactors in zsh while
