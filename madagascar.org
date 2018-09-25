@@ -1,4 +1,3 @@
-
 Some settings in spacsemacs enable madagascar function well
 
 * enable python-mode in SConstruct files
@@ -15,9 +14,10 @@ Some settings in spacsemacs enable madagascar function well
   (setq flycheck-clang-include-path '("/Users/robinzzs/madagascar/include"))
 #+END_SRC
 
-* emacs minibuffer : Server error 
+* emacs minibuffer : Server error
+
 When editing .py files I found there is no pop out candidate completion and
-pressing tab did not work also. And pressing tab will trigger a line in 
+pressing tab did not work also. And pressing tab will trigger a line in
 the bottom of Spacemacs:
 Server error: TypeError("__init__() got an unexpected argument key word 'environment' ", )
 
@@ -32,4 +32,23 @@ Solution:
 The main idea is to update anaconda-mode.
 
 * still have problem
+
 1. mini buffer did'nt appear function arguments in c-c++-mode.
+
+* fatal error: cblas.h: No such file or directory
+
+this error because of flycheck can't find the file cblas.h
+so we give the address to it.
+
+1.install openblas
+#+BEGIN_SRC shell
+  yum install openblas*
+#+END_SRC
+
+2.make sure that cblas.h in this place
+  /usr/include/openblas/cblas.h
+
+3.add path to flycheck
+#+BEGIN_SRC lisp
+  (setq flycheck-clang-include-path '("/usr/include/openblas"))
+#+END_SRC
