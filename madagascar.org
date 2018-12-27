@@ -52,3 +52,8 @@ so we give the address to it.
 #+BEGIN_SRC lisp
   (setq flycheck-clang-include-path '("/usr/include/openblas"))
 #+END_SRC
+* Importmagic and/or epc not found. importmagic.el will not be working.
+In MAC os this works.
+#+BEGIN_SRC shell
+  pip install importmagic epc
+#+END_SRC

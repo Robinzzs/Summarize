@@ -1,0 +1,143 @@
+To install TensorFlow in Centos, there are
+several steps should followed.
+
+* Install nvidia gpu driver software
+** Check kernel version
+#+BEGIN_SRC shell
+  uname -r
+  3.10.0-957.1.3.el7.x86_64
+  df  #check room of /boot
+#+END_SRC
+
+** Shutdown nouveau dirve
+Nouveau is system-built displau driver,
+need to be banned first.
+#+BEGIN_SRC shell
+  vim /etc/modprobe.d/nvidia-installer-disable-nouveau.conf
+  vim /lib/modprobe.d/nvidia-installer-disable-nouveau.conf
+  # add following command
+  blacklist nouveau
+  options nouveau modeset=0
+#+END_SRC
+
+** Rebuild initramfs imag
+Make sure room of /boot > 400MB
+#+BEGIN_SRC shell
+  cp /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).img.bak
+  dracut /boot/initramfs-$(uname -r).img $(uname -r)
+  # rm /boot/initramfs-$(uname -r).img.bak ; 这一步可不执行
+#+END_SRC
+
+** Reboot text interface
+#+BEGIN_SRC shell
+  systemctl set-default multi-user.target
+  init 3
+  reboot
+#+END_SRC
+
+** Installer nvidia gpu driver
+From nvidia web download corresponding dirver
+such as:  NVIDIA-Linux-x86_64-390.87.run
+kernel source path must be assigned
+#+BEGIN_SRC shell
+  chmod +x NVIDIA-Linux-x86_64-390.87.run
+  ./NVIDIA-Linux-x86_64-390.87.run --kernel-source-path=/usr/src/kernels/3.10.0-957.1.3.el7.x86_64  -k $(uname -r)
+#+END_SRC
+then installation begin
+
+** Check dirver situation
+#+BEGIN_SRC shell
+  lspci |grep NVIDIA
+  nvidia-smi
+#+END_SRC
+
+* Install nvidia cuda software
+** Install cuda
+From nvidia web download corresponding version
+such as: zcuda_9.0.176_384.81_linux.run
+#+BEGIN_SRC shell
+  chmod +x cuda_9.0.176_384.81_linux.run
+  ./cuda_9.0.176_384.81_linux.run
+  Install NVIDIA Accelerated Graphics Driver ... -no
+  Install OpenGL ... -no
+  Install CUDA 9.0 Toolkit ... -yes
+  Toolkit location /usr/local/cuda-9.0 ... [Enter]
+  Install a symbolic link at ... -yes
+  Install CUDA 9.0 Samples ... -yes
+  Enter CUDA Samples Location ... [Enter]
+#+END_SRC
+
+** Configure environment variable
+In .bashrc, .bash_profile or .zshrc
+#+BEGIN_SRC shell
+  export PATH=/usr/local/cuda/bin:$PATH
+  export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+#+END_SRC
+Then
+#+BEGIN_SRC shell
+  source .bashrc #(.bash_profile or .zshrc)
+#+END_SRC
+
+** Test cuda
+#+BEGIN_SRC shell
+  nvcc --version
+  cd /NVIDIA_CUDA-9.0_Samples
+  cd 1_Utilities/deviceQuery
+  make
+  ./deviceQuery
+#+END_SRC
+
+** Turn into graphic interface
+#+BEGIN_SRC shell
+  systemctl set-default graphical.target
+  init 5
+#+END_SRC
+
+* Install nvidia cudnn software
+From nvidia web download corresponding version
+such as:cudnn-9.0-linux-x64-v7.4.2.24.tgz
+#+BEGIN_SRC shell
+  tar -xvzf cudnn-9.0-linux-x64-v7.4.2.24.tgz
+  cd cuda/
+  cp include/* /usr/local/cuda/include
+  cp lib64/* /usr/local/cuda/lib64
+#+END_SRC
+
+* Install Aanaconda
+From Anaconda web download corresponding version
+such as:Anaconda2-5.2.0-Linux-x86_64.sh
+#+BEGIN_SRC shell
+  chmod +x Anaconda2-5.2.0-Linux-x86_64.sh
+  ./Anaconda2-5.2.0-Linux-x86_64.sh
+#+END_SRC
+
+* Install TenserFlow and fix bug
+** Install TenserFlow
+#+BEGIN_SRC shell
+  pip install tensorflow-gpu
+#+END_SRC
+
+** Test TensorFlow
+#+BEGIN_SRC python
+python
+>>> import tensorflow as tf
+>>> hello = tf.constant('Hello, TensorFlow!')
+>>> sess = tf.Session()
+#+END_SRC
+
+** fix bug
+
+bug imformation:
+#+BEGIN_SRC
+ /home/user/bin/conda3/lib/python3.6/site-packages/h5py/__init__.py:34:
+ FutureWarning: Conversion of the second argument of issubdtype from
+ float to np.floating is deprecated. In future, it will be treated as
+ np.float64 == np.dtype(float).type. from ._conv import
+ register_converters as _register_converters
+#+END_SRC
+
+#+BEGIN_SRC shell
+  pip install numpy==1.13.0
+  pip install h5py==2.8.0rc1
+  pip install --upgrade h5py
+#+END_SRC
