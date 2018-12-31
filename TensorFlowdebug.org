@@ -1,0 +1,50 @@
+* BUG fix
+Record some bug while learning TensorFlow
+
+** bug [1] imformation:
+#+BEGIN_SRC
+ /home/user/bin/conda3/lib/python3.6/site-packages/h5py/__init__.py:34:
+ FutureWarning: Conversion of the second argument of issubdtype from
+ float to np.floating is deprecated. In future, it will be treated as
+ np.float64 == np.dtype(float).type. from ._conv import
+ register_converters as _register_converters
+#+END_SRC
+
+#+BEGIN_SRC shell
+  pip install numpy==1.13.0
+  pip install h5py==2.8.0rc1
+  pip install --upgrade h5py
+#+END_SRC
+
+** bug [2] imformation:
+#+BEGIN_SRC
+I tensorflow/stream_executor/dso_loader.cc:142] Couldn't open CUDA
+library libcupti.so.9.0. LD_LIBRARY_PATH: /usr/local/cuda-9.0/lib64
+
+2018-05-08 09:47:01.684585: F ./tensorflow/stream_executor/lib/
+statusor.h:212] Non-OK-status: status_ status: Failed precondition:
+ could not dlopen DSO: libcupti.so.9.0; dlerror: libcupti.so.9.0:
+ cannot open shared object file: No such file or directory
+Aborted (core dumped)
+#+END_SRC
+
+add in .bashrc (.bash_profile or .zshrc)
+#+BEGIN_SRC shell
+  export LD_LIBRARY_PATH="/usr/local/cuda-9.0/lib64:/usr/local/cuda-9.0/extras/CUPTI/lib64"
+#+END_SRC
+
+
+** bug [3] imformation:
+#+BEGIN_SRC
+AttributeError: module ‘tensorflow.contrib.rnn’ has no
+attribute ‘core_rnn_cell’
+#+END_SRC
+
+change
+#+BEGIN_SRC python
+lstm_cell = tf.contrib.rnn.core_rnn_cell.BasicLSTMCell(lstm_size)
+#+END_SRC
+into
+#+BEGIN_SRC python
+lstm_cell = tf.nn.rnn_cell.BasicLSTMCell(lstm_size)
+#+END_SRC
