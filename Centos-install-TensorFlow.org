@@ -10,7 +10,7 @@ several steps should followed.
 #+END_SRC
 
 ** Shutdown nouveau dirve
-Nouveau is system-built displau driver,
+Nouveau is system-built display driver,
 need to be banned first.
 #+BEGIN_SRC shell
   vim /etc/modprobe.d/nvidia-installer-disable-nouveau.conf
@@ -42,8 +42,10 @@ kernel source path must be assigned
 #+BEGIN_SRC shell
   chmod +x NVIDIA-Linux-x86_64-390.87.run
   ./NVIDIA-Linux-x86_64-390.87.run --kernel-source-path=/usr/src/kernels/3.10.0-957.1.3.el7.x86_64  -k $(uname -r)
+  # systemctl set-default graphical.target
 #+END_SRC
 then installation begin
+
 
 ** Check dirver situation
 #+BEGIN_SRC shell

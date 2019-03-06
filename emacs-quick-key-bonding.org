@@ -1,0 +1,5 @@
+* org mode
+quick key to #BEGIN_SRC...#END_SRC
+1.
+input <s
+press Tab

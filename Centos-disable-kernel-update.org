@@ -1,0 +1,11 @@
+Two method can be used:
+
+1.
+yum -y --exclude=kernel\* update
+yum -y -x 'kernel*' update
+
+2.
+vi /etc/yum.conf
+
+[main]
+exclude=kernel*
