@@ -48,11 +48,47 @@ kernel source path must be assigned
 then dirver installation done
 
 PS:
-
 Turn off the UEFI in BIOS, it will lead to some kernel errors.
 
---dkms 可以将Nvidia模块编译进内核默认加载模块，以后升级内核时不需要重新重新安装驱动
--s     选项是silence模式安装，去掉-s是交互式模式安装
+--kernel-source-path=KERNEL-SOURCE-PATH
+      The directory containing the kernel source files that
+      should be used when compiling the NVIDIA kernel module.
+      When not specified, the installer will use
+      '/lib/modules/`uname -r`/build', if that directory exists.
+      Otherwise, it will use '/usr/src/linux'.
+
+-k KERNEL-NAME, --kernel-name=KERNEL-NAME
+      Build and install the NVIDIA kernel module for the
+      non-running kernel specified by KERNEL-NAME (KERNEL-NAME
+      should be the output of `uname -r` when the target kernel
+      is actually running).  This option implies
+      '--no-precompiled-interface'.  If the options
+      '--kernel-install-path' and '--kernel-source-path' are not
+      given, then they will be inferred from KERNEL-NAME; eg:
+      '/lib/modules/KERNEL-NAME/kernel/drivers/video/' and
+      '/lib/modules/KERNEL-NAME/build/', respectively.
+
+--dkms
+      nvidia-installer can optionally register the NVIDIA kernel
+      module sources, if installed, with DKMS, then build and
+      install a kernel module using the DKMS-registered sources.
+      This will allow the DKMS infrastructure to automatically
+      build a new kernel module when changing kernels.  During
+      installation, if DKMS is detected, nvidia-installer will
+      ask the user if they wish to register the module with DKMS;
+      the default response is 'no'.  This option will bypass the
+      detection of DKMS, and cause the installer to attempt a
+      DKMS-based installation regardless of whether DKMS is
+      present.
+      //可以将Nvidia模块编译进内核默认加载模块，以后升级内核时不需要重新重新安装驱动
+
+-s, --silent
+      Run silently; no questions are asked and no output is
+      printed, except for error messages to stderr.  This option
+      implies '--ui=none --no-questions'.
+      //silence模式安装，去掉-s是交互式模式安装
+
+
 
 ** Check dirver situation
 #+BEGIN_SRC shell
