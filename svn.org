@@ -1,0 +1,22 @@
+* svn warning
+# robinzzs@MacBookPro: ~/cleg                                      10:23:30
+➜  sup
+Warning: Failed to set locale category LC_NUMERIC to en_CN.
+Warning: Failed to set locale category LC_TIME to en_CN.
+Warning: Failed to set locale category LC_COLLATE to en_CN.
+Warning: Failed to set locale category LC_MONETARY to en_CN.
+Warning: Failed to set locale category LC_MESSAGES to en_CN.
+Updating '.':
+Authentication realm: <svn://59.72.97.59:3690> CLEG GEO Repository
+Password for 'cleg':
+
+** solution
+
+1.Warning
+Add following command into .zshrc/.bashrc/.bash_profile
+export LC_ALL="en_US.UTF-8"
+
+2.Authentication realm
+Set following command in .subvision/config and servers, then reboot
+store-passwords = yes
+store-auth-creds = yes
