@@ -1,0 +1,17 @@
+Record some experiences of tools
+
+* wget
+
+Download target file/files
+wget 下载指定url路径下的/指定类型的/(全部)文件
+
+#+BEGIN_SRC shell
+  wget http://www.ahay.org/wikilocal/docs/ -r -np -nd -A .pdf -e robots=off
+#+END_SRC
+
+where:
+-r  : 层叠递归处理
+-np : 不向上(url路径)递归
+-nd : 不创建和web网站相同(url路径)的目录结构
+-A type : 文件类型
+-e robots=off : 不考虑 robots.txt 的权限
