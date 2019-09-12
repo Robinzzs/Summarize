@@ -1,0 +1,7 @@
+* pip 换国内清华源
+如果速度比较慢，可以换国内清华源， 在终端执行下面命令：
+#+BEGIN_SRC shell
+# 升级 pip 到最新的版本后进行配置：
+pip install pip -U
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+#+END_SRC
