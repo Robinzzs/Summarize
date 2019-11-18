@@ -6,3 +6,8 @@ z m：关闭所有
 ps:一些 major mode 以及 minor mode 并不支持 z a/c/m/r/o 这种 vim 方式的折叠，
 不过 emacs 中的 narrow 和 widen 提供了一种近似折叠的功能 是每个 buffer 都能用的，
 Spacemacs 默认的 key binding 是 SPC n p/f/r 和 SPC n w,
+
+* 快速输入 #+BEGIN_SRC … #+END_SRC
+org-mode已经内置了快速输入的方法: 输入 <s 再按TAB键 ，就会自动展开为
+ #+BEGIN_SRC ... #+END_SRC 。类似地，输入 <e 再按TAB键，就会自动展开
+为 #+BEGIN_EXAMPLE ... #+END_EXAMPLE 。

@@ -110,7 +110,7 @@ Homebrew是Mac下较为优秀的包管理工具，从Macport转而使用Homebrew
 #+END_SRC
 在.zshrc中添加一行
 #+BEGIN_SRC shell
-  [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+   [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 #+END_SRC
 
 2.zsh-autosuggestions

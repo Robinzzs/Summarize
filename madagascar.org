@@ -57,3 +57,180 @@ In MAC os this works.
 #+BEGIN_SRC shell
   pip install importmagic epc
 #+END_SRC
+
+* packages not found, openmp / openmpi library
+
+Macos 10.14.6 Mojave
+
+./configure can not found some packages as shown at follow:
+#+BEGIN_SRC shell
+  ➜  ./configure CC=`which clang` CXX=`which clang++` API=f90,python3.7  --prefix=/Users/robinzzs/madagascar
+checking for Python ... /usr/local/Caskroom/miniconda/base/bin/python
+checking Python version ... 3.7.4
+checking for RSFROOT ... /Users/robinzzs/madagascar
+checking for SCons ... /usr/local/Caskroom/miniconda/base/bin/scons
+checking SCons version ... v3.1.1.72ae09dc35ac2626f8ff711d8c4b30b6138e08e3
+Running RSFROOT=/Users/robinzzs/madagascar /usr/local/Caskroom/miniconda/base/bin/scons  config ...
+------------------------
+scons: Reading SConscript files ...
+checking platform ... (cached) darwin [18.7.0]
+checking for C compiler ... (cached) /usr/local/opt/llvm/bin/clang
+checking if /usr/local/opt/llvm/bin/clang works ... yes
+checking for ar ... (cached) ar
+checking for libraries ... ['m', 'mx']
+checking complex support ... yes
+checking for X11 headers ... /opt/X11/include
+checking for X11 libraries ... /opt/X11/lib
+checking for OpenGL ... yes
+checking for sfpen ... (cached) oglpen
+checking for ppm ... no
+checking for tiff ... no
+
+  sfbyte2tif, sftif2byte, and tiffpen will not be built.
+checking for GD (PNG) ... no
+
+  gdpen will not be built.
+checking for plplot ... no
+checking for ffmpeg ... no
+checking for cairo (PNG) ... no
+checking for jpeg ... no
+
+  sfbyte2jpg, sfjpg2byte, and jpegpen will not be built.
+checking for BLAS ... yes
+checking for LAPACK ... yes
+checking for SWIG ... (cached) /usr/local/bin/swig
+checking for numpy ... (cached) yes
+checking API options ... (cached) ['f90']
+checking for C++ compiler ... (cached) /usr/local/opt/llvm/bin/clang++
+checking if /usr/local/opt/llvm/bin/clang++ works ... yes
+checking if /usr/local/opt/llvm/bin/clang++ accepts '-std=c++11 -U__STRICT_ANSI__ -Wall -pedantic' ... yes
+checking for F90 compiler ... (cached) gfortran
+checking if gfortran works ... yes
+checking gfortran type ... (cached) NAGf90Fortran
+checking F90 module extension ... (cached) .mod
+checking for MPICC ... (cached) /usr/local/bin/mpicc
+checking if /usr/local/bin/mpicc works ... yes
+checking for MPICXX ... (cached) /usr/local/bin/mpicxx
+checking if /usr/local/bin/mpicxx works ... yes
+checking for MPIRUN ... (cached) /usr/local/bin/mpirun
+checking for Posix threads ... yes
+checking for OpenMP ... no
+checking for CUDA ... (cached) no
+checking for FFTW ... no
+checking for SuiteSparse ... no
+scons: done reading SConscript files.
+scons: Building targets ...
+shell_script(["env.sh"], [])
+shell_script(["env.csh"], [])
+scons: done building targets.
+------------------------
+Done with configuration.
+#+END_SRC
+
+while add Homebrew path in /RSFSRC/framework/configure.py
+#+BEGIN_SRC python
+        if os.path.isdir('/usr'):   #paths for Homebrew
+            if os.path.isdir('/usr/local/include'):
+                context.env['CPPPATH'] = path_get(context,'CPPPATH',
+                                                  '/usr/local/include')
+            if os.path.isdir('/usr/local/lib'):
+                 context.env['LIBPATH'] = path_get(context,'LIBPATH',
+                                                  '/usr/local/lib')
+#+END_SRC
+
+that the packages can be found
+#+BEGIN_SRC shell
+➜  ./configure CC=`which clang` CXX=`which clang++` API=f90,python3.7  --prefix=/Users/robinzzs/madagascar
+checking for Python ... /usr/local/Caskroom/miniconda/base/bin/python
+checking Python version ... 3.7.4
+checking for RSFROOT ... /Users/robinzzs/madagascar
+checking for SCons ... /usr/local/Caskroom/miniconda/base/bin/scons
+checking SCons version ... v3.1.1.72ae09dc35ac2626f8ff711d8c4b30b6138e08e3
+Running RSFROOT=/Users/robinzzs/madagascar /usr/local/Caskroom/miniconda/base/bin/scons  config ...
+------------------------
+scons: Reading SConscript files ...
+checking platform ... (cached) darwin [18.7.0]
+checking for C compiler ... (cached) /usr/local/opt/llvm/bin/clang
+checking if /usr/local/opt/llvm/bin/clang works ... yes
+checking for ar ... (cached) ar
+checking for libraries ... ['m', 'mx']
+checking complex support ... yes
+checking for X11 headers ... /opt/X11/include
+checking for X11 libraries ... /opt/X11/lib
+checking for OpenGL ... yes
+checking for sfpen ... (cached) oglpen
+checking for ppm ... no
+checking for tiff ... yes
+checking for GD (PNG) ... yes
+checking for GD (GIF) ... yes
+checking for plplot ... yes
+checking for ffmpeg ... yes
+checking for cairo (PNG) ... yes
+checking for cairo (SVG) ... yes
+checking for cairo (PDF) ... yes
+checking for jpeg ... yes
+checking for BLAS ... yes
+checking for LAPACK ... yes
+checking for SWIG ... (cached) /usr/local/bin/swig
+checking for numpy ... (cached) yes
+checking API options ... (cached) ['f90']
+checking for C++ compiler ... (cached) /usr/local/opt/llvm/bin/clang++
+checking if /usr/local/opt/llvm/bin/clang++ works ... yes
+checking if /usr/local/opt/llvm/bin/clang++ accepts '-std=c++11 -U__STRICT_ANSI__ -Wall -pedantic' ... yes
+checking for F90 compiler ... (cached) gfortran
+checking if gfortran works ... yes
+checking gfortran type ... (cached) NAGf90Fortran
+checking F90 module extension ... (cached) .mod
+checking for MPICC ... (cached) /usr/local/bin/mpicc
+checking if /usr/local/bin/mpicc works ... yes
+checking for MPICXX ... (cached) /usr/local/bin/mpicxx
+checking if /usr/local/bin/mpicxx works ... yes
+checking for MPIRUN ... (cached) /usr/local/bin/mpirun
+checking for Posix threads ... yes
+checking for OpenMP ... yes
+checking for CUDA ... (cached) no
+checking for FFTW ... yes
+checking if FFTW supports threads ... yes
+checking for SuiteSparse ... yes
+checking for pfft ... no
+scons: done reading SConscript files.
+scons: Building targets ...
+shell_script(["env.sh"], [])
+shell_script(["env.csh"], [])
+scons: done building targets.
+------------------------
+Done with configuration.
+#+END_SRC
+
+By the way, if you only install openmp library,
+#+BEGIN_SRC SHELL
+brew install llvm
+brew install libomp
+#+END_SRC
+
+you wil found the problem with libomp when you test the code
+#+BEGIN_SRC SHELL
+➜  clang -fopenmp omp.c -o omp
+ld: library not found for -lomp
+clang-9: error: linker command failed with exit code 1 (use -v to see invocation)
+#+END_SRC
+
+It will be helpful that adding follows
+#+BEGIN_SRC SHELL
+export LIBRARY_PATH="/usr/local/lib"
+#+END_SRC
+in .zshrc, .bashrc or .bash_profile.
+
+And the problem with open-mpi while scons install to build the program
+#+BEGIN_SRC shell
+/usr/local/bin/mpicc -o build/user/cwp/Mbigmpiencode.o -c -O2 -fopenmp -Ibuild/include -Ibuild/include -I/usr/local/include build/user/cwp/Mbigmpiencode.c
+clang: error: unsupported option '-fopenmp'
+scons: *** [build/user/cwp/Mbigmpiencode.o] Error 1
+scons: building terminated because of errors.
+#+END_SRC
+
+To fix the issue:
+#+BEGIN_SRC SHELL
+brew uninstall --ignore-dependencies open-mpi
+brew install open-mpi --cc=llvm_clang
+#+END_SRC
