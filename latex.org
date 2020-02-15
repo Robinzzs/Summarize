@@ -1,6 +1,6 @@
 #+TITLE: latex
 
-* checke version
+* Check version
 
 #+BEGIN_SRC shell
 tex -v
@@ -8,16 +8,50 @@ latex -v
 xelatex -v
 #+END_SRC
 
-* update version
+* Update version
 
 #+BEGIN_SRC shell
 tlmgr update --al
 #+END_SRC
 
-* compile .tex file
+* Compile .tex file
+
 #+BEGIN_SRC shell
 latex test.tex  # produce .dvi
 dvipdfmx test.dvi # produce .pdf
 
 xelatex test.tex # produce .pdf directly
+#+END_SRC
+
+* Install Texlive2019 into Centos7
+Download .iso image from Tsinghua source
+#+BEGIN_SRC shell
+wget -c https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/texlive2019.iso
+#+END_SRC
+
+Mount .iso file
+#+BEGIN_SRC shell
+su
+mount -o loop texlive2019.iso  /mnt/
+cd /mnt
+./install-tl
+#+END_SRC
+
+Unmount .iso file
+#+BEGIN_SRC shell
+cd
+sudo unmount /mnt
+#+END_SRC
+
+Environment setting
+#+BEGIN_SRC shell
+export MANPATH=${MANPATH}:/urs/local/texlive/2019/texmf-dist/doc/man
+export INFOPATH=${INFOPATH}:/usr/local/texlive/2019/texmf-dist/doc/info
+export PATH=${PATH}:/usr/local/texlive/2019/bin/x86_64-linux
+#+END_SRC
+
+Setting packages update source from Tsinghua source
+#+BEGIN_SRC shell
+su
+tlmgr update --all --repository https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet
 #+END_SRC
