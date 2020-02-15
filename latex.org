@@ -1,0 +1,23 @@
+#+TITLE: latex
+
+* checke version
+
+#+BEGIN_SRC shell
+tex -v
+latex -v
+xelatex -v
+#+END_SRC
+
+* update version
+
+#+BEGIN_SRC shell
+tlmgr update --al
+#+END_SRC
+
+* compile .tex file
+#+BEGIN_SRC shell
+latex test.tex  # produce .dvi
+dvipdfmx test.dvi # produce .pdf
+
+xelatex test.tex # produce .pdf directly
+#+END_SRC

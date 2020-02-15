@@ -1,0 +1,29 @@
+#+TITLE: InstallCentosVM
+
+* VMware workstation/fusion install
+
+* Centos 8 Install
+
+language support English and Chinese
+automatic setting space
+minimal package install
+
+* Install graphical interface
+
+#+BEGIN_SRC shell
+yum group list  # check list
+yum groupinstall "Server with GUI"   # install GUI server
+systemctl set-default graphical  # default graphical interface
+#+END_SRC
+
+* install required software
+conda to configure python environment
+set Tsinghua software source for pip
+git download madagascar code
+cofigure required packages
+compile code of madagascar
+
+* install latex environment
+download software
+
+git download SEGTEX

@@ -11,3 +11,6 @@ Spacemacs 默认的 key binding 是 SPC n p/f/r 和 SPC n w,
 org-mode已经内置了快速输入的方法: 输入 <s 再按TAB键 ，就会自动展开为
  #+BEGIN_SRC ... #+END_SRC 。类似地，输入 <e 再按TAB键，就会自动展开
 为 #+BEGIN_EXAMPLE ... #+END_EXAMPLE 。
+#+BEGIN_SRC
+https://www.meiwen.com.cn/subject/nkxmjqtx.html
+#+END_SRC
