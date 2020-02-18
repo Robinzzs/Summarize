@@ -1,0 +1,53 @@
+#+TITLE: framework-madagascar
+
+Info of RSFSRC package
+
+* admin
+包含相应的平台的管理和维护工具。
+
+* api
+Madagascar为各种程序语言提供的api接口，包括c，c++，fortran77，fortran99,
+java, julia, matlab, octave, python，但c语言还是能得到更好的支持。
+
+* book
+Madagascar提供的可以复现论文结果的平台。在子目录中，各文章的文字内容
+包含在相应的latex文件中，数值实验内容包含在各实验案例的Sconstruct
+或程序文件中。
+
+* build
+编译时中间文件存放的文件夹。在对源文件进行编译时，用来存放编译过程中生成的相应文件，
+避免与源文件混淆，发生代码污染等。
+
+* framework
+相关文件定义了Madagascar平台的框。一级目录中包括了源文件编译前，
+相关软件包依赖的检测，编译环境的配置，编译的程序执行等。
+二级目录中，doc文件中为程序说明系统的配置程序，包括了对程序文件使用说明的生成等。
+ptools文件中包含基于scons架构的并行计算工具设置。
+rsf文件中提供了Madagascar平台提供的Flow，Plot，Result等重要函数的定义和设置，
+以及对latex文件环境设置和编译的支持。
+
+* pens
+包含了对一系列绘图工具包的设置，为Madagascar平台提供定制的绘图工具，并将
+vpl文件显示为图像。文件中还包含了相应的绘图设置说明，绘图工具的环境配置等。
+
+* plot
+绘图程序源文件，编译后得到的程序主要将数据文件转换为vpl图像文件。
+
+* scons
+scons程序安装文件
+
+* su
+su平台移植的相应程序。
+
+* system
+Madagascar平台的提供的基本程序的源文件。其中，
+generic为一般数据处理流程中应用的程序源文件。
+main中包含了对rsf数据操作的相应程序的源文件。
+seismic中包含地震数据处理中各处理流程的相应程序源文件。
+
+* trip
+TRIP软件的安装源文件，提供了利用优化算法的正演程序以及数值线性算法等。
+
+* user
+包含了一系列Madagascar用户的子目录。子目录中为各用户上传的模块，
+基于Madagascar平台提供的api进行开发，并用来处理相应的地球物理问题。
