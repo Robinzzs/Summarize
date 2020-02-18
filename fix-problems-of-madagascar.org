@@ -1,6 +1,6 @@
 Some settings in spacsemacs enable madagascar function well
 
-* enable python-mode in SConstruct files
+* enable python-mode in SConstruct files for emacs
 
 #+BEGIN_SRC lisp
   (setq auto-mode-alist
@@ -8,7 +8,7 @@ Some settings in spacsemacs enable madagascar function well
   (set-default 'compile-command "scons")
 #+END_SRC
 
-* c file header <rsf.h>
+* c file header <rsf.h> for spacsemacs
 
 #+BEGIN_SRC lisp
   (setq flycheck-clang-include-path '("/Users/robinzzs/madagascar/include"))
